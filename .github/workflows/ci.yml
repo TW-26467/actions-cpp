@@ -26,10 +26,10 @@ jobs:
         ctest --output-on-failure
         
     - name: Build docker images using cache
-      uses: whoan/docker-build-with-cache-action@v2
+      uses: tw26467/docker-build-with-cache-action@v2
       with:
-        username: whoan
-        password: 123
+        username: tw26467
+        password: "${{ secrets.DOCKER_PASSWORD }}"
         image_name: test-docker-action
         
     - name: Publish Docker Images to GPR
