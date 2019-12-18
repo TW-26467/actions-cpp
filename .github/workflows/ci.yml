@@ -4,19 +4,17 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Build docker images using cache
       uses: whoan/docker-build-with-cache-action@v2
       with:
-        username: "${{ secrets.DOCKER_USERNAME }}"
-        password: "${{ secrets.DOCKER_PASSWORD }}"
+        username: tw26467
+        password: "${{ secrets.tw26467 }}"
         image_name: test-docker-action
         
-    - name: Publish Docker Images to GPR
-      uses: machine-learning-apps/gpr-docker-publish@v1.3
-      with:
-        IMAGE_NAME: 'test-docker-action'
+    #- name: Publish Docker Images to GPR
+    #  uses: machine-learning-apps/gpr-docker-publish@v1.3
+   #   with:
+      #  IMAGE_NAME: 'test-docker-action'
