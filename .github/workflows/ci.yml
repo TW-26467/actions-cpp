@@ -24,5 +24,6 @@ jobs:
         cmake . -DCMAKE_TOOLCHAIN_FILE=conan_paths.cmake
         cmake --build .
         ctest --output-on-failure
+        
     - name: Publish Docker Images to GPR
       uses: machine-learning-apps/gpr-docker-publish@v1.3
