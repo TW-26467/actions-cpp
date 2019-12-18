@@ -8,13 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build docker images using cache
-      uses: whoan/docker-build-with-cache-action@v2
-      with:
-        username: "tw26467"
-        password: "14488750873939528b575050733c7680825bbb79"
-        image_name: test-docker-action
-        
-    #- name: Publish Docker Images to GPR
-    #  uses: machine-learning-apps/gpr-docker-publish@v1.3
-   #   with:
-      #  IMAGE_NAME: 'test-docker-action'
+      run: |
+        docker login docker.pkg.github.com --username tw26467
+        docker tag docker_test docker.pkg.github.com/tw26467/actions-cpp/test:1.0
+        docker push docker.pkg.github.com/tw26467/actions-cpp/test:1.0
