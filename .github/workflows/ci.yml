@@ -24,3 +24,14 @@ jobs:
         cmake . -DCMAKE_TOOLCHAIN_FILE=conan_paths.cmake
         cmake --build .
         ctest --output-on-failure
+    
+    - name: Publish Docker Image to GPR
+      uses: actions/gpr-docker-publish@master
+      id: docker
+      with:
+        IMAGE_NAME: 'test-docker-action'
+        TAG: 'my-optional-tag-name'
+        DOCKERFILE_PATH: 'argo/gpu.Dockerfile'
+        BUILD_CONTEXT: 'argo/'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
