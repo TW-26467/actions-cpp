@@ -28,8 +28,8 @@ jobs:
     - name: Build docker images using cache
       uses: whoan/docker-build-with-cache-action@v2
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: tw26467
+        password: d224402c5b25bcd953e6182b2c0269eb26451c9e
         image_name: test-docker-action
         
     - name: Publish Docker Images to GPR
