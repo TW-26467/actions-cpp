@@ -9,6 +9,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build docker images using cache
       run: |
-        docker login docker.pkg.github.com --username tw26467 -p "${{ secrets.DOCKER_PASSWORD }}"
+        docker login docker.pkg.github.com --username tw26467 -p "${{ secrets.tw26467 }}"
         docker tag docker_test docker.pkg.github.com/tw26467/actions-cpp/test:1.0
         docker push docker.pkg.github.com/tw26467/actions-cpp/test:1.0
