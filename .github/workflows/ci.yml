@@ -8,28 +8,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/setup-python@v1
-    - name: Install conan && conan package tools
-      run: |
-        python -m pip install --upgrade pip
-        pip install conan
-        pip install conan_package_tools
     - uses: actions/checkout@v1
-    - name: conan
-      run: |
-        conan install . -s compiler.libcxx=libstdc++11
-    - name: cmake
-      run: |
-        find /home/runner/.conan -name '*.so*'
-        cmake . -DCMAKE_TOOLCHAIN_FILE=conan_paths.cmake
-        cmake --build .
-        ctest --output-on-failure
-        
     - name: Build docker images using cache
       uses: whoan/docker-build-with-cache-action@v2
       with:
-        username: tw26467
-        password: d224402c5b25bcd953e6182b2c0269eb26451c9e
+        username: "${{ secrets.DOCKER_USERNAME }}"
+        password: "${{ secrets.DOCKER_PASSWORD }}"
         image_name: test-docker-action
         
     - name: Publish Docker Images to GPR
