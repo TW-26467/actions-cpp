@@ -25,6 +25,13 @@ jobs:
         cmake --build .
         ctest --output-on-failure
         
+    - name: Build docker images using cache
+      uses: whoan/docker-build-with-cache-action@v2
+      with:
+        username: whoan
+        password: 123
+        image_name: test-docker-action
+        
     - name: Publish Docker Images to GPR
       uses: machine-learning-apps/gpr-docker-publish@v1.3
       with:
