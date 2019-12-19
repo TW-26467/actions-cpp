@@ -7,16 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Release
-      uses: softprops/action-gh-release@v0.1.0
-      with:
-        # Note-worthy description of changes in release
-        body: # optional, default is empty
-        # Path to load note-worthy description of changes in release from
-        body-path: # optional, default is empty
-        # Gives the release a custom name
-        name: 1.0.0 # optional, default is Name of tag
-        # Creates a draft release
-        draft: # optional, default is false
-        # Comma-delimited list of path globs for asset files to upload
-        files: # optional, default is empty
+    - name: show
+      run:  |
+        echo ${{ secrets.GITHUB_TOKEN }}
