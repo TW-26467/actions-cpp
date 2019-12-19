@@ -12,3 +12,8 @@ jobs:
         docker login docker.pkg.github.com --username "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
         docker build -t docker.pkg.github.com/tw26467/actions-cpp/test:2.0 .
         docker push docker.pkg.github.com/tw26467/actions-cpp/test:2.0
+    
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
