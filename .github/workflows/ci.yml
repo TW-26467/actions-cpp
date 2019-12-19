@@ -14,6 +14,7 @@ jobs:
         docker push docker.pkg.github.com/tw26467/actions-cpp/test:2.0
     
     - name: Release
-      uses: softprops/action-gh-release@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: elgohr/Github-Release-Action@3.0
+      with:
+        # The name of the release to publish
+        release: 1.0.0
