@@ -7,7 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-      
+    - run: |
+        env
     #- name: Build docker images using cache
     #  run: |
     #      docker login docker.pkg.github.com --username "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
@@ -20,7 +21,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         tag_aaa: $( date "+%Y%m%d%H%M%S" )
       with:
-        tag_name: ${{ tag_aaa }}
+        tag_name: $(tag_aaa)
         release_name: Release v1.0.1
         body: |
           Changes in this Release
