@@ -10,6 +10,7 @@ jobs:
 
     - name: Release
       uses: softprops/action-gh-release@v1
+      with:
+        tag: v1.0.09
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        tags: v1.0.0
