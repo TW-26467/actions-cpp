@@ -6,10 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Environment Printer
-      uses: managedkaos/print-env@v1.0
-      
     - uses: actions/checkout@v1
+      
     - name: Build docker images using cache
       if: contains(github.ref, 'refs/tags/')
       run: |
