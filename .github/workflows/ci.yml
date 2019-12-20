@@ -14,14 +14,11 @@ jobs:
       if: contains(github.ref, 'refs/tags/v')
       run: |
         REPO="${GITHUB_REPOSITORY,,}"
-
-        # extract tag from `${GITHUB_REF}`.  Only works if workflow triggered by tag push.
+        echo ${REPO}
         VERSION="$(echo "${GITHUB_REF}" | awk -F/ '{print $NF}')"
         echo ${VERSION}
-        if [[ -n "${{ steps.tags.outputs.minor }}" ]]; then
-          NEW_TAG="${REPO}:${{ steps.tags.outputs.minor }}"
-          echo ${ NEW_TAG }
-          # docker login docker.pkg.github.com --username "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-          # docker build -t docker.pkg.github.com/tw26467/actions-cpp/test:${ NEW_TAG } .
-          # docker push docker.pkg.github.com/tw26467/actions-cpp/test:${ NEW_TAG }
-        fi
+        echo ${GITHUB_REPOSITORY}/${ DOCKER_TAG }
+        # docker login docker.pkg.github.com --username "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
+        # docker build -t docker.pkg.github.com/tw26467/actions-cpp/test:${ NEW_TAG } .
+        # docker push docker.pkg.github.com/tw26467/actions-cpp/test:${ NEW_TAG }
+        
