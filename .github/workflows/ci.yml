@@ -6,10 +6,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Environment Printer
+      uses: managedkaos/print-env@v1.0
+      
     - uses: actions/checkout@v1
     - name: Build docker images using cache
       if: contains(github.ref, 'refs/tags/v')
       run: |
-          docker login docker.pkg.github.com --username "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-          docker build -t docker.pkg.github.com/tw26467/actions-cpp/test:${{ GITHUB_TAG }} .
-          docker push docker.pkg.github.com/tw26467/actions-cpp/test:${{ GITHUB_TAG }}
+        REPO="${GITHUB_REPOSITORY,,}"
+
+        # extract tag from `${GITHUB_REF}`.  Only works if workflow triggered by tag push.
+        VERSION="$(echo "${GITHUB_REF}" | awk -F/ '{print $NF}')"
+
+        if [[ -n "${{ steps.tags.outputs.minor }}" ]]; then
+          NEW_TAG="${REPO}:${{ steps.tags.outputs.minor }}"
+          echo ${ NEW_TAG }
+          # docker login docker.pkg.github.com --username "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
+          # docker build -t docker.pkg.github.com/tw26467/actions-cpp/test:${ NEW_TAG } .
+          # docker push docker.pkg.github.com/tw26467/actions-cpp/test:${ NEW_TAG }
+        fi
