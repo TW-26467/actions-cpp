@@ -11,14 +11,10 @@ jobs:
       
     - uses: actions/checkout@v1
     - name: Build docker images using cache
-      if: contains(github.ref, 'refs/tags/v')
+      if: contains(github.ref, 'refs/tags/')
       run: |
-        REPO="${GITHUB_REPOSITORY,,}"
-        echo ${REPO}
-        VERSION="$(echo "${GITHUB_REF}" | awk -F/ '{print $NF}')"
-        echo ${VERSION}
-        echo "${GITHUB_REPOSITORY}/${VERSION}"
-        # docker login docker.pkg.github.com --username "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-        # docker build -t docker.pkg.github.com/tw26467/actions-cpp/test:${ NEW_TAG } .
-        # docker push docker.pkg.github.com/tw26467/actions-cpp/test:${ NEW_TAG }
+        DOCKER_TAG="$(echo "${GITHUB_REF}" | awk -F/ '{print $NF}')"
+        docker login docker.pkg.github.com --username "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
+        docker build -t docker.pkg.github.com/${GITHUB_REPOSITORY}/release:${DOCKER_TAG} .
+        docker push docker.pkg.github.com/${GITHUB_REPOSITORY}/release:${DOCKER_TAG}
         
