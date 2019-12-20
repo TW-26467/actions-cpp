@@ -17,7 +17,7 @@ jobs:
 
         # extract tag from `${GITHUB_REF}`.  Only works if workflow triggered by tag push.
         VERSION="$(echo "${GITHUB_REF}" | awk -F/ '{print $NF}')"
-
+        echo ${VERSION}
         if [[ -n "${{ steps.tags.outputs.minor }}" ]]; then
           NEW_TAG="${REPO}:${{ steps.tags.outputs.minor }}"
           echo ${ NEW_TAG }
